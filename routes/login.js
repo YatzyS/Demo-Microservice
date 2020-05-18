@@ -1,10 +1,8 @@
-require('dotenv').config()
-
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
+var wt = require("../utilities/webtokens.js")
 
-const jwt = require("jsonwebtoken")
 
 router.use(bodyParser.json())
 
@@ -14,7 +12,7 @@ router.post('/', function(req, res) {
   //Authenticate user
   if(username != undefined && password != undefined) {
     const user = { uname: username, pass: password }
-    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+    const accessToken = wt.getWebToken(user)
     res.json({ accessToke: accessToken })
   }
   res.status(404).send("Invalid Input")
