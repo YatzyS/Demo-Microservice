@@ -1,0 +1,5 @@
+.nyc_output
+package-lock.json
+npm-debug.log
+request.rest
+node_modules
