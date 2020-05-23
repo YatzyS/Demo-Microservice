@@ -1,3 +1,4 @@
+var debug = require('debug')('microservice');
 var express = require('express');
 var path = require('path');
 
@@ -14,5 +15,10 @@ app.use(logger('tiny'))
 app.use('/login', login);
 app.use('/jsonPatch', jsonpatch);
 app.use('/thumbnail', thumbnail);
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
 
 module.exports = app;

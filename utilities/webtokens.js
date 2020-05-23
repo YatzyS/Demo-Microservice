@@ -7,7 +7,6 @@ function getWebToken(object){
 
 function authenticateToken(token, callback) {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, object) => {
-        if(err) return null
         callback(err, object)
     })
 }

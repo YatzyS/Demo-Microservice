@@ -13,11 +13,14 @@ router.get('/', function(req, res) {
 
   wt.authenticateToken(token, (err, user) => {
     if(err != null) return res.status(403).send("Invalid token")
+
+    if(!req.body.hasOwnProperty("json") || !req.body.hasOwnProperty("patch")) {
+      res.status(404).send("No data or missing data in request")
+    }
     const json = req.body.json
     const patch = req.body.patch
-    console.log(json,patch)
     applypatch(json, patch, (patchedjson) => {
-        res.send(patchedjson)
+      res.send(patchedjson)
     })
   })
 });

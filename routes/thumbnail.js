@@ -13,6 +13,9 @@ router.get('/', function(req, res) {
 
   wt.authenticateToken(token, (err, user) => {
     if(err != null) return res.status(403).send("Invalid token")
+      if(!req.body.hasOwnProperty("url")) {
+        res.status(404).send("No url found in request")
+      }
       const imgUrl = req.body.url
       jimp.read(imgUrl, (err, image) => {
         if(err != null) return res.status(404).send("Image not found") 
@@ -20,7 +23,7 @@ router.get('/', function(req, res) {
           if(err != null) return res.status(404).send("Image not found")
           res.send(uri)
         })
-      })
+      })  
   })
 });
 
