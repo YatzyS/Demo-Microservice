@@ -46,7 +46,7 @@ describe("Thumbnail scenarios", () => {
             }
             var token = require("../utilities/webtokens").getWebToken(user)
             chai.request(server)
-                .get("/thumbnail")
+                .post("/thumbnail")
                 .set("Content-Type","application/json")
                 .set("Authorization", "Bearer "+token)
                 .send({
@@ -62,7 +62,7 @@ describe("Thumbnail scenarios", () => {
     describe("Thumbnail Negative scenarios", () => {
         it("it should give 401 No token found", (done) => {
             chai.request(server)
-                .get("/thumbnail")
+                .post("/thumbnail")
                 .set("Content-Type","application/json")
                 .send({
                     "url": "https://via.placeholder.com/150.jpg"
@@ -75,7 +75,7 @@ describe("Thumbnail scenarios", () => {
     
         it("it should give 403 Invalid token", (done) => {
             chai.request(server)
-                .get("/thumbnail")
+                .post("/thumbnail")
                 .set("Content-Type","application/json")
                 .set("Authorization", "Bearer d123")
                 .send({
@@ -94,7 +94,7 @@ describe("Thumbnail scenarios", () => {
             }
             var token = require("../utilities/webtokens").getWebToken(user)
             chai.request(server)
-                .get("/thumbnail")
+                .post("/thumbnail")
                 .set("Content-Type","application/json")
                 .set("Authorization", "Bearer "+token)
                 .end((err, res) => {
@@ -115,7 +115,7 @@ describe("JsonPatch Scenarios", () => {
             }
             var token = require("../utilities/webtokens").getWebToken(user)
             chai.request(server)
-                .get("/jsonPatch")
+                .post("/jsonPatch")
                 .set("Content-Type","application/json")
                 .set("Authorization", "Bearer "+token)
                 .send({
@@ -142,7 +142,7 @@ describe("JsonPatch Scenarios", () => {
     describe("JsonPath Negative scenarios", () => {
         it("it should give 401 No token found", (done) => {
             chai.request(server)
-                .get("/jsonPatch")
+                .post("/jsonPatch")
                 .set("Content-Type","application/json")
                 .send({
                     "json": {
@@ -161,7 +161,7 @@ describe("JsonPatch Scenarios", () => {
 
         it("it should give 403 Invalid token", (done) => {
             chai.request(server)
-                .get("/jsonPatch")
+                .post("/jsonPatch")
                 .set("Content-Type","application/json")
                 .set("Authorization", "Bearer abcd")
                 .send({
@@ -186,7 +186,7 @@ describe("JsonPatch Scenarios", () => {
             }
             var token = require("../utilities/webtokens").getWebToken(user)
             chai.request(server)
-                .get("/jsonPatch")
+                .post("/jsonPatch")
                 .set("Content-Type","application/json")
                 .set("Authorization", "Bearer "+token)
                 .end((err, res) => {
