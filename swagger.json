@@ -1,0 +1,191 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Demo Microsevice",
+    "description": "Sample microservice that authorizes user and provides with JWT tokens in order to access various endpoints",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "login",
+      "description": "Get access token to access remaining endpoints"
+    },
+    {
+      "name": "jsonPatch",
+      "description": "Apply patch to passed json"
+    },
+    {
+      "name": "thumbnail",
+      "description": "Thumbnail creation"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "Get access token",
+        "operationId": "addPet",
+        "requestBody": {
+          "description": "Pass username and password",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jsonPatch": {
+      "post": {
+        "tags": [
+          "jsonPatch"
+        ],
+        "summary": "Returns json with patch applied",
+        "description": "Returns json with patch applied",
+        "operationId": "applyPatch",
+        "requestBody": {
+          "description": "Returns json with patch applied",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonPatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonPatchResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/thumbnail": {
+      "post": {
+        "tags": [
+          "thumbnail"
+        ],
+        "summary": "Get thumbnail from the passed image url",
+        "description": "Get thumbnail from the passed image url",
+        "operationId": "createThumbnail",
+        "requestBody": {
+          "description": "Created thumbnail from the passed image url",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Thumbnail"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Base64 encoded image",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          }
+        }
+      },
+      "JsonPatchRequest": {
+        "type": "object",
+        "properties": {
+          "json": {
+            "type": "object",
+            "properties": {}
+          },
+          "patch": {
+            "type": "object",
+            "properties": {}
+          }
+        }
+      },
+      "JsonPatchResponse": {
+        "type": "object",
+        "properties": {
+          "json": {
+            "type": "object",
+            "properties": {}
+          }
+        }
+      },
+      "Thumbnail": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

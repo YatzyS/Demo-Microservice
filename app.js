@@ -1,6 +1,7 @@
 var debug = require('debug')('microservice');
 var express = require('express');
-var path = require('path');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 var logger = require('morgan');
 
@@ -11,7 +12,7 @@ var thumbnail = require('./routes/thumbnail');
 var app = express();
 
 app.use(logger('tiny'))
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use('/login', login);
 app.use('/jsonPatch', jsonpatch);
 app.use('/thumbnail', thumbnail);

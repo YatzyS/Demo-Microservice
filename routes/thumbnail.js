@@ -6,7 +6,7 @@ var wt = require("../utilities/webtokens.js")
 
 router.use(bodyParser.json())
 
-router.get('/', function(req, res) {
+router.post('/', function(req, res) {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
   if(token == null) return res.status(401).send("No token found in request")
