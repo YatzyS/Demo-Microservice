@@ -23,6 +23,6 @@
     - Then you can start the server by runnning 'npm start'
 - Instead of manually running the project you can also use docker for it. For using docker follwing is the procedure:
     - Clone the project
-    - Goto the project directory and run 'docker build -t <your docker image name> .'
-    - Then run 'docker run -p 3000:3000 -d <your docker image name>'. This will start docker daemon which you can access at port 3000.
+    - Goto the project directory and run 'docker build -t your_docker_image_name*.'
+    - Then run 'docker run -p 3000:3000 -d your_docker_image_name'. This will start docker daemon which you can access at port 3000.
 
